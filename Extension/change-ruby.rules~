@@ -1,0 +1,9 @@
+
+{ 'FOR':MODEL $var:VAR '':B_INI $ini '':E_INI '':B_END $end '':E_END 'False':END_INCLUDE }
+  => {'for':CT_BE ' ':SP_B $val:ID_VF ' ':SP_B 'in':IN ' ':SP_B $ini '...':OP_X $end 'do':CT_DO '\n':SP_NL }
+
+{ 'FOR':MODEL $var:VAR '':B_INI $ini '':E_INI '':B_END $end '':E_END 'True':END_INCLUDE }
+  => {'for':CT_BE ' ':SP_B $val:ID_VF ' ':SP_B 'in':IN ' ':SP_B $ini '..':OP_Y $end 'do':CT_DO '\n':SP_NL }
+
+{ 'FOREACH':MODEL $var:VAR $array:ARRAY }
+  => {'for':CT_BE ' ':SP_B $val:ID_VF ' ':SP_B 'in':IN ' ':SP_B $array:ID_VF 'do':CT_DO '\n':SP_NL }

@@ -1,0 +1,2 @@
+{ 'FOR':MODEL  $var:VAR $ini:INI $end:END 'False':END_INCLUDE }
+  => {'for':CT_BE ' ':SP_B $val:ID_VF ' ':SP 'in':IN ' ':SP_B 'range':RANGE '('#1:P_L $ini:LIN ',':CA $end:LIN ')'#1:P_R '\n':SP_NL }

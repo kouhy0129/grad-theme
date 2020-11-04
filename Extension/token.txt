@@ -1,0 +1,24 @@
+既存のtoken.def は変更したくない
+TEBAを無拡張で使いたいから
+
+token <= 直接書き換えるのは良くない
+python用ruby用などでそれぞれtoken.def の追加ファイルを作成
+python.def ruby.defなど
+python.def + token.def => Tokenizerに適用
+目的（言語）別に作成した方が綺麗じゃない？
+その方がそのほうがCparserから得られる結果が汚くても許されるんじゃないか
+
+それぞれの言語にtoken.def を適応して解析してから今書かれている言語を判定する
+python <- python.def + token.def
+ruby <- ruby.def + token.def
+php <- php.def + token.def
+
+Cparese.pm  # C言語にtoken.def により字句種別に変換
+Check.pm  # 全言語をtoken.def により変換
+            python, ruby, php ...
+
+正しい言語だったとしても言語を変換する
+書き方は記述者次第だから変換して統一する
+for(i=1;i<=10;i++) => for( i = 1; i <= 10; i++)
+
+言語名のテキストファイルを作成し、そこに書かれているrulesやdefを自動で読み取り実行することで今後の拡張に役立つ

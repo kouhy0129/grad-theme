@@ -1,0 +1,3 @@
+CT_FOREACH /foreach\b/
+CT_EIF /elseif\b/
+AS /as\b/

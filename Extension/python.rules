@@ -1,0 +1,54 @@
+#Python if statements
+{ $:CT_IF $:SP
+  $[cond: $[: $:B_P $:ANY $:E_P $]+ $]
+  $:SP $:CO}
+  => { 'Python':LANG 'IF':MODEL '':B_COND $cond '':E_COND}
+
+
+# Python elif statements
+{ $:CT_EIF $:SP
+  $[cond: $[: $:B_P $:ANY $:E_P $]+ $]
+  $:SP $:CO}
+  => { 'Python':LANG 'ELSEIF':MODEL '':B_COND $cond '':E_COND}
+
+
+# Python else statements
+{ $:CT_EL $:_NO_IF $:SP $:CO}
+  => { 'Python':LANG 'ELSE':MODEL }
+
+
+# Python while statements
+{ $:CT_BE/while/ $:SP
+  $[cond: $[: $:B_P $:ANY $:E_P $]+ $]
+  $:SP $:CO}
+  => { 'Python':LANG 'WHILE':MODEL '':B_COND $cond '':E_COND}
+
+
+# Python for statements
+
+# range(ini,end)
+{ $:CT_BE/for/ $:SP
+  $#1:B_P $var:ID_VF $#1:E_P
+  $:SP $:IN $:SP $:RANGE
+  $#2:B_P $:P_L $:SP $#3:B_P $ini:ANY $#3:E_P $:SP
+  $:CA
+  $:SP $#4:B_P $end:ANY $#4:E_P $:SP $:P_R $#2:E_P
+  $:SP $:CO}
+  => { 'Python':LANG 'FOR':MODEL $var:VAR '':B_INI $ini '':E_INI '':B_END $end '':E_END 'False':END_INCLUDE}
+
+# range(end)
+{ $:CT_BE/for/ $:SP
+  $#1:B_P $var:ID_VF $#1:E_P
+  $:SP $:IN $:SP $:RANGE
+  $#2:B_P $:P_L $:SP $#3:B_P $end:ANY $#3:E_P $:SP $:P_R $#2:E_P
+  $:SP $:CO}
+  => { 'Python':LANG 'FOR':MODEL $var:VAR '0':INI '':B_END $end '':E_END 'False':END_INCLUDE}
+
+
+# Python foreach statements
+{ $:CT_BE/for/ $sp:SP
+  $#1:B_P $var:ID_VF $#1:E_P
+  $:SP $:IN $:SP
+  $#3:B_P $array:ID_VF $#3:E_P
+  $:SP $:CO}
+  => { 'Python':LANG 'FOREACH':MODEL $var:VAR $array:ARRAY }

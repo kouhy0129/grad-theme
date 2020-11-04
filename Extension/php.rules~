@@ -1,0 +1,27 @@
+#削除
+{ $:UNIT_BEGIN } => {}
+{ $:UNIT_END } => {}
+{ $:B_ST } => {}
+{ $:E_ST } => {}
+{ $:_B_IF } => {}
+{ $:_E_IF } => {}
+{ $:_B_CT } => {}
+{ $:_E_CT } => {}
+
+# elseif
+{ $:CT_EIF $:SP $#1:B_P $:P_L $:SP
+  $[cond: $#2:B_P $:ANY $#2:E_P $]+
+  $:SP $:P_R $#1:E_P $:SP $[: $:C_L $:C_R $]?
+  }
+  => {'PHP':LANG 'ELSEIF':MODEL '':B_COND $cond '':E_COND }
+
+# foreach
+{ $:CT_FOREACH $:SP $#1:B_P $:P_L $:SP
+  $#2:B_P $array:ID_VF $#2:E_P $:SP
+  $:AS $:SP
+  $#4:B_P $var:ID_VF $#4:E_P $:SP $:P_R
+  $#1:E_P $:SP $[: $:C_L $:C_R $]?
+  }
+  => {'PHP':LANG 'FOREACH':MODEL $var:VAR $array:ARRAY}
+
+
